@@ -1,13 +1,224 @@
 from enum import Enum
 
-
 class Query(str, Enum):
-    QUERY_GAME_CONFIG = "query QUERY_GAME_CONFIG {\n  telegramGameGetConfig {\n    ...FragmentBossFightConfig\n    __typename\n  }\n}\n\nfragment FragmentBossFightConfig on TelegramGameConfigOutput {\n  _id\n  coinsAmount\n  currentEnergy\n  maxEnergy\n  weaponLevel\n  energyLimitLevel\n  energyRechargeLevel\n  tapBotLevel\n  currentBoss {\n    _id\n    level\n    currentHealth\n    maxHealth\n    __typename\n  }\n  freeBoosts {\n    _id\n    currentTurboAmount\n    maxTurboAmount\n    turboLastActivatedAt\n    turboAmountLastRechargeDate\n    currentRefillEnergyAmount\n    maxRefillEnergyAmount\n    refillEnergyLastActivatedAt\n    refillEnergyAmountLastRechargeDate\n    __typename\n  }\n  nonce\n  __typename\n}"
-    MutationTelegramUserLogin = "mutation MutationTelegramUserLogin($webAppData: TelegramWebAppDataInput!) {\n  telegramUserLogin(webAppData: $webAppData) {\n    access_token\n    __typename\n  }\n}"
-    MutationGameProcessTapsBatch = "mutation MutationGameProcessTapsBatch($payload: TelegramGameTapsBatchInput!) {\n  telegramGameProcessTapsBatch(payload: $payload) {\n    ...FragmentBossFightConfig\n    __typename\n  }\n}\n\nfragment FragmentBossFightConfig on TelegramGameConfigOutput {\n  _id\n  coinsAmount\n  currentEnergy\n  maxEnergy\n  weaponLevel\n  zonesCount\n  tapsReward\n  energyLimitLevel\n  energyRechargeLevel\n  tapBotLevel\n  currentBoss {\n    _id\n    level\n    currentHealth\n    maxHealth\n    __typename\n  }\n  freeBoosts {\n    _id\n    currentTurboAmount\n    maxTurboAmount\n    turboLastActivatedAt\n    turboAmountLastRechargeDate\n    currentRefillEnergyAmount\n    maxRefillEnergyAmount\n    refillEnergyLastActivatedAt\n    refillEnergyAmountLastRechargeDate\n    __typename\n  }\n  bonusLeaderDamageEndAt\n  bonusLeaderDamageStartAt\n  bonusLeaderDamageMultiplier\n  nonce\n  __typename\n}"
-    telegramGameSetNextBoss = "mutation telegramGameSetNextBoss {\n  telegramGameSetNextBoss {\n    ...FragmentBossFightConfig\n    __typename\n  }\n}\n\nfragment FragmentBossFightConfig on TelegramGameConfigOutput {\n  _id\n  coinsAmount\n  currentEnergy\n  maxEnergy\n  weaponLevel\n  energyLimitLevel\n  energyRechargeLevel\n  tapBotLevel\n  currentBoss {\n    _id\n    level\n    currentHealth\n    maxHealth\n    __typename\n  }\n  freeBoosts {\n    _id\n    currentTurboAmount\n    maxTurboAmount\n    turboLastActivatedAt\n    turboAmountLastRechargeDate\n    currentRefillEnergyAmount\n    maxRefillEnergyAmount\n    refillEnergyLastActivatedAt\n    refillEnergyAmountLastRechargeDate\n    __typename\n  }\n  nonce\n  __typename\n}"
-    telegramGameActivateBooster = "mutation telegramGameActivateBooster($boosterType: BoosterType!) {\n  telegramGameActivateBooster(boosterType: $boosterType) {\n    ...FragmentBossFightConfig\n    __typename\n  }\n}\n\nfragment FragmentBossFightConfig on TelegramGameConfigOutput {\n  _id\n  coinsAmount\n  currentEnergy\n  maxEnergy\n  weaponLevel\n  energyLimitLevel\n  energyRechargeLevel\n  tapBotLevel\n  currentBoss {\n    _id\n    level\n    currentHealth\n    maxHealth\n    __typename\n  }\n  freeBoosts {\n    _id\n    currentTurboAmount\n    maxTurboAmount\n    turboLastActivatedAt\n    turboAmountLastRechargeDate\n    currentRefillEnergyAmount\n    maxRefillEnergyAmount\n    refillEnergyLastActivatedAt\n    refillEnergyAmountLastRechargeDate\n    __typename\n  }\n  nonce\n  __typename\n}"
-    telegramGamePurchaseUpgrade = "mutation telegramGamePurchaseUpgrade($upgradeType: UpgradeType!) {\n  telegramGamePurchaseUpgrade(type: $upgradeType) {\n    ...FragmentBossFightConfig\n    __typename\n  }\n}\n\nfragment FragmentBossFightConfig on TelegramGameConfigOutput {\n  _id\n  coinsAmount\n  currentEnergy\n  maxEnergy\n  weaponLevel\n  energyLimitLevel\n  energyRechargeLevel\n  tapBotLevel\n  currentBoss {\n    _id\n    level\n    currentHealth\n    maxHealth\n    __typename\n  }\n  freeBoosts {\n    _id\n    currentTurboAmount\n    maxTurboAmount\n    turboLastActivatedAt\n    turboAmountLastRechargeDate\n    currentRefillEnergyAmount\n    maxRefillEnergyAmount\n    refillEnergyLastActivatedAt\n    refillEnergyAmountLastRechargeDate\n    __typename\n  }\n  nonce\n  __typename\n}"
+    QUERY_GAME_CONFIG = """
+    query QUERY_GAME_CONFIG {
+      telegramGameGetConfig {
+        ...FragmentBossFightConfig
+        __typename
+      }
+    }
+
+    fragment FragmentBossFightConfig on TelegramGameConfigOutput {
+      _id
+      coinsAmount
+      currentEnergy
+      maxEnergy
+      weaponLevel
+      energyLimitLevel
+      energyRechargeLevel
+      tapBotLevel
+      currentBoss {
+        _id
+        level
+        currentHealth
+        maxHealth
+        __typename
+      }
+      freeBoosts {
+        _id
+        currentTurboAmount
+        maxTurboAmount
+        turboLastActivatedAt
+        turboAmountLastRechargeDate
+        currentRefillEnergyAmount
+        maxRefillEnergyAmount
+        refillEnergyLastActivatedAt
+        refillEnergyAmountLastRechargeDate
+        __typename
+      }
+      nonce
+      __typename
+    }
+    """
+    
+    MutationTelegramUserLogin = """
+    mutation MutationTelegramUserLogin($webAppData: TelegramWebAppDataInput!) {
+      telegramUserLogin(webAppData: $webAppData) {
+        access_token
+        __typename
+      }
+    }
+    """
+    
+    MutationGameProcessTapsBatch = """
+    mutation MutationGameProcessTapsBatch($payload: TelegramGameTapsBatchInput!) {
+      telegramGameProcessTapsBatch(payload: $payload) {
+        ...FragmentBossFightConfig
+        __typename
+      }
+    }
+
+    fragment FragmentBossFightConfig on TelegramGameConfigOutput {
+      _id
+      coinsAmount
+      currentEnergy
+      maxEnergy
+      weaponLevel
+      zonesCount
+      tapsReward
+      energyLimitLevel
+      energyRechargeLevel
+      tapBotLevel
+      currentBoss {
+        _id
+        level
+        currentHealth
+        maxHealth
+        __typename
+      }
+      freeBoosts {
+        _id
+        currentTurboAmount
+        maxTurboAmount
+        turboLastActivatedAt
+        turboAmountLastRechargeDate
+        currentRefillEnergyAmount
+        maxRefillEnergyAmount
+        refillEnergyLastActivatedAt
+        refillEnergyAmountLastRechargeDate
+        __typename
+      }
+      bonusLeaderDamageEndAt
+      bonusLeaderDamageStartAt
+      bonusLeaderDamageMultiplier
+      nonce
+      __typename
+    }
+    """
+    
+    telegramGameSetNextBoss = """
+    mutation telegramGameSetNextBoss {
+      telegramGameSetNextBoss {
+        ...FragmentBossFightConfig
+        __typename
+      }
+    }
+
+    fragment FragmentBossFightConfig on TelegramGameConfigOutput {
+      _id
+      coinsAmount
+      currentEnergy
+      maxEnergy
+      weaponLevel
+      energyLimitLevel
+      energyRechargeLevel
+      tapBotLevel
+      currentBoss {
+        _id
+        level
+        currentHealth
+        maxHealth
+        __typename
+      }
+      freeBoosts {
+        _id
+        currentTurboAmount
+        maxTurboAmount
+        turboLastActivatedAt
+        turboAmountLastRechargeDate
+        currentRefillEnergyAmount
+        maxRefillEnergyAmount
+        refillEnergyLastActivatedAt
+        refillEnergyAmountLastRechargeDate
+        __typename
+      }
+      nonce
+      __typename
+    }
+    """
+    
+    telegramGameActivateBooster = """
+    mutation telegramGameActivateBooster($boosterType: BoosterType!) {
+      telegramGameActivateBooster(boosterType: $boosterType) {
+        ...FragmentBossFightConfig
+        __typename
+      }
+    }
+
+    fragment FragmentBossFightConfig on TelegramGameConfigOutput {
+      _id
+      coinsAmount
+      currentEnergy
+      maxEnergy
+      weaponLevel
+      energyLimitLevel
+      energyRechargeLevel
+      tapBotLevel
+      currentBoss {
+        _id
+        level
+        currentHealth
+        maxHealth
+        __typename
+      }
+      freeBoosts {
+        _id
+        currentTurboAmount
+        maxTurboAmount
+        turboLastActivatedAt
+        turboAmountLastRechargeDate
+        currentRefillEnergyAmount
+        maxRefillEnergyAmount
+        refillEnergyLastActivatedAt
+        refillEnergyAmountLastRechargeDate
+        __typename
+      }
+      nonce
+      __typename
+    }
+    """
+    
+    telegramGamePurchaseUpgrade = """
+    mutation telegramGamePurchaseUpgrade($upgradeType: UpgradeType!) {
+      telegramGamePurchaseUpgrade(type: $upgradeType) {
+        ...FragmentBossFightConfig
+        __typename
+      }
+    }
+
+    fragment FragmentBossFightConfig on TelegramGameConfigOutput {
+      _id
+      coinsAmount
+      currentEnergy
+      maxEnergy
+      weaponLevel
+      energyLimitLevel
+      energyRechargeLevel
+      tapBotLevel
+      currentBoss {
+        _id
+        level
+        currentHealth
+        maxHealth
+        __typename
+      }
+      freeBoosts {
+        _id
+        currentTurboAmount
+        maxTurboAmount
+        turboLastActivatedAt
+        turboAmountLastRechargeDate
+        currentRefillEnergyAmount
+        maxRefillEnergyAmount
+        refillEnergyLastActivatedAt
+        refillEnergyAmountLastRechargeDate
+        __typename
+      }
+      nonce
+      __typename
+    }
+    """
 
 
 class OperationName(str, Enum):
